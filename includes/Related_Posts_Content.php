@@ -44,8 +44,7 @@ class Related_Posts_Content
             "post_per_page" => 5,
             "category__in" => $category_ids,
             "post__not_in" => array($post_id),
-            "orderby" => "date",
-            "order" => "DESC"
+            "orderby" => "rand",
 
         ));
 

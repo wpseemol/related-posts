@@ -50,6 +50,7 @@ class Related_Posts_Main
     private function define_constants()
     {
         define("RELATED_POSTS_PLUGIN_PATH", plugin_dir_path(__FILE__));
+        define("RELATED_POSTS_PLUGIN_URL", plugin_dir_url(__FILE__));
     }
 
     private function load_class()
@@ -57,9 +58,11 @@ class Related_Posts_Main
 
         require_once RELATED_POSTS_PLUGIN_PATH . "includes/Admin_Menu.php";
         require_once RELATED_POSTS_PLUGIN_PATH . "includes/Related_Posts_Content.php";
+        require_once RELATED_POSTS_PLUGIN_PATH . "includes/Wp_Enqueue_Style.php";
 
         new Related_Posts\Admin_Menu();
         new Related_Posts\Related_Posts_Content();
+        new Related_Posts\Wp_Enqueue_Style();
 
     }
 
