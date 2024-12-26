@@ -1,6 +1,10 @@
 <?php
 namespace Related_Posts;
 
+if (!defined("ABSPATH")) {
+    return;
+}
+
 class Admin_Menu
 {
     public function __construct()

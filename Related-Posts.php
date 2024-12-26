@@ -56,8 +56,10 @@ class Related_Posts_Main
     {
 
         require_once RELATED_POSTS_PLUGIN_PATH . "includes/Admin_Menu.php";
+        require_once RELATED_POSTS_PLUGIN_PATH . "includes/Related_Posts_Content.php";
 
         new Related_Posts\Admin_Menu();
+        new Related_Posts\Related_Posts_Content();
 
     }
 
