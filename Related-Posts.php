@@ -54,6 +54,11 @@ class Related_Posts_Main
 
     private function load_class()
     {
+
+        require_once RELATED_POSTS_PLUGIN_PATH . "includes/Admin_Menu.php";
+
+        new Related_Posts\Admin_Menu();
+
     }
 
 
