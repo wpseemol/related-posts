@@ -21,3 +21,45 @@ if (!defined("ABSPATH")) {
     return;
 }
 
+class Related_Posts_Main
+{
+
+    private static $instance = null;
+
+    private function __construct()
+    {
+
+        // all constant function call here
+        $this->define_constants();
+
+        // call all file loaded function
+        $this->load_class();
+
+    }
+
+    public static function get_instance()
+    {
+        if (self::$instance === null) {
+            self::$instance = new self();
+        }
+
+        return self::$instance;
+    }
+
+
+    private function define_constants()
+    {
+        define("RELATED_POSTS_PLUGIN_PATH", plugin_dir_path(__FILE__));
+    }
+
+    private function load_class()
+    {
+    }
+
+
+
+
+
+}
+
+Related_Posts_Main::get_instance();
