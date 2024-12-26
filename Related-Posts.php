@@ -15,3 +15,9 @@
  * Text Domain:       related-posts
  * Domain Path:       /languages
  */
+
+
+if (!defined("ABSPATH")) {
+    return;
+}
+
