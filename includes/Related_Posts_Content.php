@@ -55,9 +55,11 @@ class Related_Posts_Content
             return $content;
         }
 
+        ob_start();
+        include(RELATED_POSTS_PLUGIN_PATH . "includes/templates/related_post_content.php");
+        $related_content = ob_get_clean();
 
-        $content .= include(RELATED_POSTS_PLUGIN_PATH . "includes/templates/related_post_content.php");
-
+        $content .= $related_content;
 
         return $content;
     }
