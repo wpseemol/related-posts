@@ -95,7 +95,7 @@ class Admin_Menu
     public function render_image_upload_field()
     {
         $options = get_option('related_posts_options', ['default_image' => '']);
-        $default_image = isset($options['default_image']) ? esc_url($options['default_image']) : '';
+        $default_image = isset($options['default_image']) ? esc_url($options['default_image']) : 'https://i.ibb.co.com/2Ww6SnG/deffault-image.jpg';
 
         echo '<div>
             <input type="text" placeholder="Image url" id="default_image" name="related_posts_options[default_image]" value="' . $default_image . '" class="regular-text"
