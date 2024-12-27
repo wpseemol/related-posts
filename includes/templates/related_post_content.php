@@ -1,5 +1,8 @@
 <section class="related-post-container">
-    <h2>related post</h2>
+    <h2><?php echo $options["title"] ?></h2>
+
+
+
     <div class="related-post-card-container">
         <?php foreach ($related_posts as $post): ?>
             <div class="related-post-card">

@@ -29,6 +29,18 @@ class Related_Posts_Content
             return $content;
         }
 
+
+        $options = get_option("related_posts_options", array("show_hidden" => 1, "title" => "default title", "show_word" => 5));
+
+        print_r($options);
+
+
+
+        if (empty($options['show_hidden'])) {
+            return $content;
+        }
+
+
         global $post;
 
         // $post_id = get_the_ID();
@@ -57,6 +69,7 @@ class Related_Posts_Content
 
 
         ob_start();
+
         include(RELATED_POSTS_PLUGIN_PATH . "includes/templates/related_post_content.php");
         $related_content = ob_get_clean();
 

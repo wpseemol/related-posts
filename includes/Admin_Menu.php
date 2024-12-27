@@ -29,13 +29,9 @@ class Admin_Menu
     }
 
 
-
     public function admin_menu_content_callback()
     {
-
-
         include RELATED_POSTS_PLUGIN_PATH . "includes/templates/admin_menu_contents.php";
-
     }
 
 
@@ -44,43 +40,84 @@ class Admin_Menu
         register_setting("related_posts_settings", "related_posts_options", array("sanitize_callback" => array($this, "sanitize_options_callback")));
 
 
-        add_settings_section("related_posts_main_section", "Related Posts Settings", null, "wp-related-posts");
+        add_settings_section("related_posts_main_section", "Related Posts Settings", array($this, "add_settings_section_callback"), "wp-related-posts");
 
         add_settings_field("show_hidden_field", "Show/hidden Posts", array($this, "render_checkbox_field"), "wp-related-posts", 'related_posts_main_section');
 
         add_settings_field(
-            'related_posts_title',        // Field ID
-            'Related Posts Title',                 // Title
-            array($this, 'render_text_field'), // Callback to display
-            'wp-related-posts',           // Page slug
-            'related_posts_main_section'  // Section ID
+            'related_posts_title',
+            'Related Posts Title',
+            array($this, 'render_text_field'),
+            'wp-related-posts',
+            'related_posts_main_section'
+        );
+
+        add_settings_field("show_word", "Content Show Word", array($this, "render_show_word_field"), "wp-related-posts", 'related_posts_main_section');
+
+        add_settings_field(
+            'default_image',
+            'Default Related Post Image',
+            array($this, 'render_image_upload_field'),
+            'wp-related-posts',
+            'related_posts_main_section'
         );
 
     }
 
 
+    public function add_settings_section_callback()
+    {
+        echo "<p>Configure the settings for Related Posts.</p>";
+    }
+
+
     public function render_checkbox_field()
     {
-        $options = get_option('related_posts_options');
-        $checked = isset($options['show_hidden']) ? 'checked' : '';
+        $options = get_option('related_posts_options', ['show_hidden' => 1, 'title' => 'Related Posts']);
+        $checked = isset($options['show_hidden']) && $options['show_hidden'] ? 'checked' : '';
         echo '<input type="checkbox" name="related_posts_options[show_hidden]" ' . $checked . '>';
     }
 
     public function render_text_field()
     {
-        $options = get_option('related_posts_options');
+        $options = get_option('related_posts_options', ['show_hidden' => 1, 'title' => 'Related Posts']);
         $title = isset($options['title']) ? esc_attr($options['title']) : '';
         echo '<input type="text" name="related_posts_options[title]" value="' . $title . '" class="regular-text">';
     }
+
+    public function render_show_word_field()
+    {
+        $options = get_option('related_posts_options', ['show_hidden' => 1, 'title' => 'Related Posts', "show_word" => 5]);
+        $show_word_number = isset($options['show_word']) ? esc_attr($options['show_word']) : 0;
+        echo '<input type="number" name="related_posts_options[show_word]" value="' . $show_word_number . '" class="regular-text">';
+    }
+
+    public function render_image_upload_field()
+    {
+        $options = get_option('related_posts_options', ['default_image' => '']);
+        $default_image = isset($options['default_image']) ? esc_url($options['default_image']) : '';
+
+        echo '<div>
+            <input type="text" placeholder="Image url" id="default_image" name="related_posts_options[default_image]" value="' . $default_image . '" class="regular-text"
+            <br><img src="' . $default_image . '" id="default_image_preview" style="max-width: 160px; margin-top: 10px; display:' . ($default_image ? 'block' : 'none') . ';">
+          </div>';
+
+    }
+
 
     public function sanitize_options_callback($input)
     {
         return [
             'show_hidden' => isset($input['show_hidden']) ? 1 : 0,
-            'title' => sanitize_text_field($input['title'])
+            'title' => sanitize_text_field($input['title']),
+            'show_word' => sanitize_text_field($input['show_word']),
+            'default_image' => esc_url_raw($input['default_image']),
         ];
 
     }
+
+
+
 
 
 }
