@@ -17,7 +17,7 @@
 
                         $thumbnail_url = get_the_post_thumbnail_url($post->ID, "thumbnail");
                     } else {
-                        $thumbnail_url = isset($options["default_image"]) ? $options["default_image"] : "Please upload image";
+                        $thumbnail_url = isset($options["default_image"]) ? $options["default_image"] : "https://i.ibb.co.com/2Ww6SnG/deffault-image.jpg";
                     }
                     echo "<img src='$thumbnail_url' alt=' $post->post_title;' class='related-posts-image' />";
                     ?>
@@ -48,8 +48,6 @@
 
                         echo $post->post_content;
                     }
-
-
 
                     ?>
                 </p>
