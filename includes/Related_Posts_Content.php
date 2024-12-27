@@ -28,7 +28,7 @@ class Related_Posts_Content
         }
 
 
-        $options = get_option("related_posts_options", array('show_hidden' => 1, 'title' => 'Related Posts', "show_word" => 5, "default_image" => "https://i.ibb.co.com/2Ww6SnG/deffault-image.jpg"));
+        $options = get_option("related_posts_options", array('show_hidden' => 1, 'title' => 'Related Posts', "show_word" => 10, "default_image" => "https://i.ibb.co.com/2Ww6SnG/deffault-image.jpg"));
 
 
         if (empty($options['show_hidden'])) {

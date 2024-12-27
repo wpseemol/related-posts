@@ -73,29 +73,29 @@ class Admin_Menu
 
     public function render_checkbox_field()
     {
-        $options = get_option('related_posts_options', ['show_hidden' => 1, 'title' => 'Related Posts']);
+        $options = get_option('related_posts_options', array('show_hidden' => 1, 'title' => 'Related Posts', "show_word" => 10, 'default_image' => 'https://i.ibb.co.com/2Ww6SnG/deffault-image.jpg'));
         $checked = isset($options['show_hidden']) && $options['show_hidden'] ? 'checked' : '';
         echo '<input type="checkbox" name="related_posts_options[show_hidden]" ' . $checked . '>';
     }
 
     public function render_text_field()
     {
-        $options = get_option('related_posts_options', ['show_hidden' => 1, 'title' => 'Related Posts']);
+        $options = get_option('related_posts_options', array('show_hidden' => 1, 'title' => 'Related Posts', "show_word" => 10, 'default_image' => 'https://i.ibb.co.com/2Ww6SnG/deffault-image.jpg'));
         $title = isset($options['title']) ? esc_attr($options['title']) : '';
         echo '<input type="text" name="related_posts_options[title]" value="' . $title . '" class="regular-text">';
     }
 
     public function render_show_word_field()
     {
-        $options = get_option('related_posts_options', ['show_hidden' => 1, 'title' => 'Related Posts', "show_word" => 5]);
+        $options = get_option('related_posts_options', array('show_hidden' => 1, 'title' => 'Related Posts', "show_word" => 10, 'default_image' => 'https://i.ibb.co.com/2Ww6SnG/deffault-image.jpg'));
         $show_word_number = isset($options['show_word']) ? esc_attr($options['show_word']) : 0;
         echo '<input type="number" name="related_posts_options[show_word]" value="' . $show_word_number . '" class="regular-text">';
     }
 
     public function render_image_upload_field()
     {
-        $options = get_option('related_posts_options', ['default_image' => '']);
-        $default_image = isset($options['default_image']) ? esc_url($options['default_image']) : 'https://i.ibb.co.com/2Ww6SnG/deffault-image.jpg';
+        $options = get_option('related_posts_options', array('show_hidden' => 1, 'title' => 'Related Posts', "show_word" => 10, 'default_image' => 'https://i.ibb.co.com/2Ww6SnG/deffault-image.jpg'));
+        $default_image = isset($options['default_image']) ? esc_url($options['default_image']) : '';
 
         echo '<div>
             <input type="text" placeholder="Image url" id="default_image" name="related_posts_options[default_image]" value="' . $default_image . '" class="regular-text"
