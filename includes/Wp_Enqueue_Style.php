@@ -14,8 +14,6 @@ class Wp_Enqueue_Style
 
         add_action("wp_enqueue_scripts", array($this, "wp_enqueue_scripts_callback"));
 
-
-
     }
 
 
