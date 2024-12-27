@@ -17,8 +17,6 @@ class Related_Posts_Content
 
 
         add_filter("the_content", array($this, "the_content_callback"));
-
-
     }
 
 
@@ -30,10 +28,7 @@ class Related_Posts_Content
         }
 
 
-        $options = get_option("related_posts_options", array("show_hidden" => 1, "title" => "default title", "show_word" => 5));
-
-        print_r($options);
-
+        $options = get_option("related_posts_options");
 
 
         if (empty($options['show_hidden'])) {
@@ -77,6 +72,4 @@ class Related_Posts_Content
 
         return $content;
     }
-
-
 }
