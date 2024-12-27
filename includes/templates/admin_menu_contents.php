@@ -3,28 +3,19 @@
         Related Posts
     </h1>
 
-    <form action="">
+    <form method="post" action="options.php">
 
-        <table class="form-table">
-            <tr>
-                <th scope="row"><label for="showHidden">Posts Show / Hidden</label></th>
-                <td><input name="showHidden" type="checkbox" id="showHidden" class="regular-text"></td>
-            </tr>
-
-            <tr>
-                <th scope="row"><label for="related-posts-title">Site Title</label></th>
-                <td><input name="related-posts-title" type="text" id="related-posts-title" value=""
-                        class="regular-text">
-                </td>
-            </tr>
-
-        </table>
-
-        <p class="submit"><input type="submit" name="submit" id="submit" class="button button-primary"
-                value="Save Changes"></p>
+        <?php
+        // Output security fields for the registered setting
+        settings_fields('related_posts_settings');
 
 
+        // Output setting fields (inputs, etc.)
+        do_settings_sections('wp-related-posts');
 
+        // Save button
+        submit_button();
+        ?>
 
 
 

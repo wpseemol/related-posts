@@ -10,6 +10,8 @@ class Admin_Menu
     public function __construct()
     {
         add_action("admin_menu", array($this, "admin_menu_callback"));
+
+        add_action("admin_init", array($this, "register_settings_callback"));
     }
 
     public function admin_menu_callback()
@@ -33,6 +35,50 @@ class Admin_Menu
 
 
         include RELATED_POSTS_PLUGIN_PATH . "includes/templates/admin_menu_contents.php";
+
+    }
+
+
+    public function register_settings_callback()
+    {
+        register_setting("related_posts_settings", "related_posts_options", array("sanitize_callback" => array($this, "sanitize_options_callback")));
+
+
+        add_settings_section("related_posts_main_section", "Related Posts Settings", null, "wp-related-posts");
+
+        add_settings_field("show_hidden_field", "Show/hidden Posts", array($this, "render_checkbox_field"), "wp-related-posts", 'related_posts_main_section');
+
+        add_settings_field(
+            'related_posts_title',        // Field ID
+            'Related Posts Title',                 // Title
+            array($this, 'render_text_field'), // Callback to display
+            'wp-related-posts',           // Page slug
+            'related_posts_main_section'  // Section ID
+        );
+
+    }
+
+
+    public function render_checkbox_field()
+    {
+        $options = get_option('related_posts_options');
+        $checked = isset($options['show_hidden']) ? 'checked' : '';
+        echo '<input type="checkbox" name="related_posts_options[show_hidden]" ' . $checked . '>';
+    }
+
+    public function render_text_field()
+    {
+        $options = get_option('related_posts_options');
+        $title = isset($options['title']) ? esc_attr($options['title']) : '';
+        echo '<input type="text" name="related_posts_options[title]" value="' . $title . '" class="regular-text">';
+    }
+
+    public function sanitize_options_callback($input)
+    {
+        return [
+            'show_hidden' => isset($input['show_hidden']) ? 1 : 0,
+            'title' => sanitize_text_field($input['title'])
+        ];
 
     }
 
