@@ -16,12 +16,14 @@
                     $thumbnail_url = "";
                     if (has_post_thumbnail($post->ID)) {
 
-                        $thumbnail_url = get_the_post_thumbnail($post);
+                        $thumbnail_url = get_the_post_thumbnail_url($post->ID, "thumbnail");
                     } else {
-                        $thumbnail_url = "";
+                        $thumbnail_url = $options["default_image"];
                     }
 
-                    echo ($thumbnail_url);
+
+
+                    echo "<img src='$thumbnail_url' alt=' $post->post_title;' class='related-posts-image' />";
 
 
                     ?>
@@ -38,7 +40,7 @@
                     ?>
                 </p>
                 <p>
-                    <?php echo $post->post_date; ?>
+                    <?php echo wp_date("d F, Y", strtotime($post->post_date)); ?>
                 </p>
             </div>
         <?php endforeach; ?>
